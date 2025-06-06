@@ -1,220 +1,76 @@
-<?php
-session_start();
-$logoutNotif = isset($_GET['logout']) ? true : false;
-?>
-
-
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MABOOK | Perpustakaan Digital Dark Academia</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Mabook</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            /* Autumn Dark Academia Color Palette */
-            --dark-1: #1A120B;
-            /* Darkest Brown */
-            --dark-2: #3C2A21;
-            /* Dark Brown */
-            --dark-3: #5C3D2E;
-            /* Medium Brown */
-            --accent-1: #B85C38;
-            /* Rust/Red */
-            --accent-2: #E0C097;
-            /* Light Beige */
-            --text-light: #F5F5F5;
-            --text-dark: #1A120B;
-            --paper: #F0E4D4;
-            /* Vintage Paper */
-            --old-paper: #E7D8C0;
-            --olive: #6B8E23;
-            /* Olive Green */
-            --burgundy: #800020;
-            /* Burgundy */
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/output.css">
 </head>
 
-<body>
-    <?php if ($logoutNotif): ?>
-        <div class="logout-alert">
-            Anda telah berhasil keluar dari akun. Sekarang dalam mode tamu.
-        </div>
-    <?php endif; ?>
-    <!-- Header -->
+<body class="bg-[url('https://www.transparenttextures.com/patterns/black-paper.png')] bg-[#1A120B]">
+    <?php include('./components/header.php') ?>
 
-    <?php
-    include "./components/header.php";
-    ?>
-
-
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>MabooK</h1>
-                <p>Perpustakaan digital Dark Academia yang menghadirkan koleksi literatur klasik dan kontemporer terbaik. Temukan dunia pengetahuan, fiksi spekulatif, puisi abadi, dan karya-karya pemikiran mendalam dalam genggaman Anda.</p>
-                <a href="#collections" class="cta-button">Jelajahi Koleksi</a>
+    <div class="w-11/12 max-w-[1200px] mx-auto mt-12">
+        <div class="hero w-full shadow-[0_10px_20px_rgba(0,0,0,0.5)]">
+            <div class="w-10/12 max-w-[1000px] mx-auto px-16 py-32 gap-12 flex flex-col items-center justify-center">
+                <div class="font-unifraktur text-mabook-light text-5xl font-bold">Maboo<span class="font-crimson">k</span></div>
+                <p class="font-crimson text-xl text-center text-white">
+                    Perpustakaan digital Dark Academia yang menghadirkan koleksi literatur klasik dan kontemporer terbaik. Temukan dunia pengetahuan, fiksi spekulatif, puisi abadi, dan karya-karya pemikiran mendalam dalam genggaman Anda.
+                </p>
+                <a href="#" class="bg-mabook-midtone p-3 shadow-xl font-crimson text-white font-bold text-lg">Jelajahi Koleksi</a>
             </div>
-        </section>
+        </div> <!-- end hero section -->
 
-        <!-- Quote Section -->
-        <section class="quote-section">
-            <div class="quote-content">
-                <p class="quote-text">"Reading is essential for those who seek to rise above the ordinary."</p>
-                <p class="quote-author">— Jim Rohn</p>
+        <div class="quote w-full mt-12 relative">
+            <div class="absolute inset-0 bg-black/30"></div>
+            <div class="relative z-10 w-10/12 max-w-[1000px] mx-auto py-12 gap-4 flex flex-col items-center justify-center">
+                <p class="text-3xl text-mabook-light italic font-semibold">"Reading is essential for those who seek to rise above the ordinary."</p>
+                <span class="text-lg text-mabook-midtone">— Jim Rohn</span>
             </div>
-        </section>
+        </div> <!-- end quote section -->
 
-        <!-- Features Section -->
-        <section class="features-section">
-            <h2 class="section-title" style="text-align: center; margin-bottom: 2rem; color: var(--accent-2);">Mengapa Memilih MABOOK?</h2>
-            <div class="features">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <h3 class="feature-title">Koleksi Eksklusif</h3>
-                    <p class="feature-desc">Ribuan buku digital dari berbagai genre, termasuk literatur klasik, filosofi, sejarah, dan fiksi spekulatif.</p>
+        <div>
+            <div class="font-unifraktur text-mabook-light text-4xl font-bold">Mengapa memilih Maboo<span class="font-crimson">k</span></div>
+            <div class="h-[2px] w-48 bg-mabook-midtone mt-4"></div>
+            <div class="grid m-4 grid-cols-3 gap-8 mt-8">
+                <div class="text-mabook-light flex flex-col items-start justify-center p-8 border border-mabook-midtone/25 gap-5 bg-mabook-primary relative rounded-xl overflow-hidden font-crimson">
+                    <div class="absolute top-0 left-0 h-[6px] bg-mabook-midtone w-full"></div>
+                    <i class="fas fa-book text-mabook-midtone text-4xl mb-4"></i>
+                    <div class="font-bold text-3xl">Koleksi Ekslusif</div>
+                    <p>Ribuan buku digital dari berbagai genre, termasuk literatur klasik, filosofi, sejarah, dan fiksi spekulatif.</p>
                 </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-moon"></i>
-                    </div>
-                    <h3 class="feature-title">Mode Baca Nyaman</h3>
-                    <p class="feature-desc">Mode malam dan penyesuaian font untuk pengalaman membaca yang lebih nyaman di segala kondisi.</p>
+                <div class="text-mabook-light flex flex-col items-start justify-center p-8 border border-mabook-midtone/25 gap-5 bg-mabook-primary relative rounded-xl overflow-hidden font-crimson">
+                    <div class="absolute top-0 left-0 h-[6px] bg-mabook-midtone w-full"></div>
+                    <i class="fas fa-moon text-mabook-midtone text-4xl mb-4"></i>
+                    <div class="font-bold text-3xl">Mode Baca Nyaman </div>
+                    <p>Mode malam dan penyesuaian font untuk pengalaman membaca yang lebih nyaman di segala kondisi..</p>
                 </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-bookmark"></i>
-                    </div>
-                    <h3 class="feature-title">Book Tracker</h3>
-                    <p class="feature-desc">Lacak buku yang sedang dan akan dibaca dengan sistem yang terorganisir dan personal.</p>
+                <div class="text-mabook-light flex flex-col items-start justify-center p-8 border border-mabook-midtone/25 gap-5 bg-mabook-primary relative rounded-xl overflow-hidden font-crimson">
+                    <div class="absolute top-0 left-0 h-[6px] bg-mabook-midtone w-full"></div>
+                    <i class="fas fa-bookmark text-mabook-midtone text-4xl mb-4"></i>
+                    <div class="font-bold text-3xl">Book Tracker</div>
+                    <p>Lacak buku yang sedang dan akan dibaca dengan sistem yang terorganisir dan personal.</p>
                 </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-pen-fancy"></i>
-                    </div>
-                    <h3 class="feature-title">Catatan Pribadi</h3>
-                    <p class="feature-desc">Tambahkan highlight dan catatan pribadi di setiap halaman buku yang Anda baca.</p>
+                <div class="text-mabook-light flex flex-col items-start justify-center p-8 border border-mabook-midtone/25 gap-5 bg-mabook-primary relative rounded-xl overflow-hidden font-crimson">
+                    <div class="absolute top-0 left-0 h-[6px] bg-mabook-midtone w-full"></div>
+                    <i class="fas fa-book text-mabook-midtone text-4xl mb-4"></i>
+                    <div class="font-bold text-3xl">Catatan Pribadi</div>
+                    <p>Tambahkan highlight dan catatan pribadi di setiap halaman buku yang Anda baca.</p>
                 </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-fire"></i>
-                    </div>
-                    <h3 class="feature-title">Reading Streak</h3>
-                    <p class="feature-desc">Pertahankan kebiasaan membaca dengan sistem streak harian yang memotivasi.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-headphones"></i>
-                    </div>
-                    <h3 class="feature-title">AudioBook</h3>
-                    <p class="feature-desc">Nikmati koleksi audio book untuk pengalaman mendengarkan yang imersif (coming soon).</p>
+                <div class="text-mabook-light flex flex-col items-start justify-center p-8 border border-mabook-midtone/25 gap-5 bg-mabook-primary relative rounded-xl overflow-hidden font-crimson">
+                    <div class="absolute top-0 left-0 h-[6px] bg-mabook-midtone w-full"></div>
+                    <i class="fas fa-fire text-mabook-midtone text-4xl mb-4"></i>
+                    <div class="font-bold text-3xl">Reading Streak</div>
+                    <p>Pertahankan kebiasaan membaca dengan sistem streak harian yang memotivasi.</p>
                 </div>
             </div>
-        </section>
-    </main>
+        </div> <!-- end value proposition -->
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-column">
-                <h3>Tentang Mabook</h3>
-                <ul>
-                    <li><a href="#">Visi & Misi</a></li>
-                    <li><a href="#">Tim Kami</a></li>
-                    <li><a href="#">Karir</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
+    </div> <!-- end container -->
 
-            <div class="footer-column">
-                <h3>Bantuan</h3>
-                <ul>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Panduan Penggunaan</a></li>
-                    <li><a href="#">Kontak Kami</a></li>
-                    <li><a href="#">Laporan Masalah</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-column">
-                <h3>Legal</h3>
-                <ul>
-                    <li><a href="#">Kebijakan Privasi</a></li>
-                    <li><a href="#">Syarat & Ketentuan</a></li>
-                    <li><a href="#">Lisensi</a></li>
-                    <li><a href="#">Kebijakan Hak Cipta</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-column">
-                <h3>Terhubung</h3>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                </div>
-                <p style="margin-top: 1rem; color: var(--accent-2);">newsletter@MABOOK.com</p>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2025 MABOOK. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Profile Dropdown Toggle
-        const profileToggle = document.getElementById('profileToggle');
-        const profileDropdown = document.getElementById('profileDropdown');
-
-        profileToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            profileDropdown.classList.toggle('active');
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function() {
-            profileDropdown.classList.remove('active');
-        });
-
-        // Prevent dropdown from closing when clicking inside it
-        profileDropdown.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
-    <script>
-        function confirmLogout(event) {
-            event.preventDefault();
-            if (confirm("Apakah kamu yakin ingin keluar dari akun?")) {
-                window.location.href = "logout.php";
-            }
-        }
-    </script>
-
+    <?php include('./components/footer.php') ?>
 </body>
 
 </html>
