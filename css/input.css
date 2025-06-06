@@ -28,3 +28,15 @@
     margin-bottom: 3rem;
     position: relative;
 }
+
+.mabook-label {
+    @apply block font-semibold font-crimson text-mabook-light mb-1;
+}
+
+.mabook-form-control {
+    @apply focus:outline-none p-2 text-mabook-light border border-mabook-light/50 w-full rounded-xl;
+}
+
+.mabook-btn-primary {
+    @apply w-full p-2 bg-mabook-midtone text-white/80 rounded-xl shadow-lg duration-200 cursor-pointer hover:-translate-y-0.5 active:translate-y-1;
+}

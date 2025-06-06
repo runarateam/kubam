@@ -19,7 +19,8 @@
             <form action="#">
                 <input type="text" name="username" placeholder="Your email/username..." class="w-full mt-4 p-3 placeholder:text-mabook-light text-mabook-light font-crimson text-lg focus:outline-none border border-mabook-midtone/40">
                 <input type="password" name="password" placeholder="Your password..." class="w-full mt-4 p-3 placeholder:text-mabook-light text-mabook-light font-crimson text-lg focus:outline-none border border-mabook-midtone/40">
-                <button type="submit" class="bg-mabook-midtone p-3 text-center w-full mt-4 font-crimson font-bold text-lg cursor-pointer active:translate-y-0.5">Sign in</button>
+                <!-- <button type="submit" class="bg-mabook-midtone p-3 text-center w-full mt-4 font-crimson font-bold text-lg cursor-pointer active:translate-y-0.5">Sign in</button> -->
+                <a href="/admin/dashboard.php" class="block bg-mabook-midtone p-3 text-center w-full mt-4 font-crimson font-bold text-lg cursor-pointer active:translate-y-0.5">Sign in</a>
             </form>
         </div>
     </div>
