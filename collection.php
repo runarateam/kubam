@@ -1,5 +1,10 @@
 <?php include('./config/constants.php') ?>
 <?php include('../mabook/admin/dummy.php') ?>
+<?php
+$authorId = $_GET['author_id'];
+$publisherId = $_GET['publisher_id'];
+$year = $_GET['year'];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +25,27 @@
         <div>
             <div class="font-unifraktur text-mabook-light text-4xl font-bold">Koleksi Maboo<span class="font-crimson">k</span></div>
             <div class="h-[2px] w-48 bg-mabook-midtone mt-4"></div>
+            <div class="w-full flex justify-between items-center mt-2 gap-3">
+                <select class="mabook-form-control" id="filter-author">
+                    <option value="">- Pilih penulis -</option>
+                    <?php foreach ($authors as $author): ?>
+                        <option value="<?= $author['id'] ?>" <?php if ($author['id'] == $authorId): ?>selected<?php endif; ?>><?= $author['name'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <select class="mabook-form-control" id="filter-publisher">
+                    <option value="">- Pilih penerbit -</option>
+                    <?php foreach ($publishers as $publisher): ?>
+                        <option value="<?= $publisher['id'] ?>" <?php if ($publisher['id'] == $publisherId): ?>selected<?php endif; ?>><?= $publisher['name'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <select class="mabook-form-control" id="filter-year">
+                    <option value="">- Pilih tahun -</option>
+                    <option value="2007">2007</option>
+                    <option value="2008">2008</option>
+                    <option value="2009">2009</option>
+                    <option value="2010">2010</option>
+                </select>
+            </div>
             <div class="grid m-4 grid-cols-4 gap-8 mt-8">
                 <?php foreach ($books as $book) : ?>
                     <a href="reader.php?book_id=<?= $book['id'] ?>" class="group">
@@ -42,6 +68,45 @@
     </div> <!-- end container -->
 
     <?php include('./components/footer.php') ?>
+    <script>
+        const filterObj = {}
+        <?= isset($authorId) ? "filterObj.author_id = $authorId \n" : '' ?>
+        <?= isset($publisherId) ? "filterObj.publisher_id = $publisherId \n" : '' ?>
+        <?= isset($year) ? "filterObj.year = $year \n" : '' ?>
+
+        const filterAuthorEl = document.querySelector('#filter-author');
+        const filterPublisherEl = document.querySelector('#filter-publisher');
+        const filterYearEl = document.querySelector('#filter-year');
+
+        // ini kalo filter author berubah
+        filterAuthorEl.addEventListener('change', e => {
+            value = e.target.value
+            if (!value) delete filterObj.author_id
+            else filterObj.author_id = value
+            redirectToFilter()
+        })
+
+        // ini kalo filter publisher berubah
+        filterPublisherEl.addEventListener('change', e => {
+            value = e.target.value
+            if (!value) delete filterObj.publisher_id
+            else filterObj.publisher_id = value
+            redirectToFilter()
+        })
+
+        // ini kalo filter year berubah
+        filterYearEl.addEventListener('change', e => {
+            value = e.target.value
+            if (!value) delete filterObj.year
+            else filterObj.year = value
+            redirectToFilter()
+        })
+
+        function redirectToFilter() {
+            const query = new URLSearchParams(filterObj).toString()
+            window.location.href = `${window.location.pathname}?${query}`
+        }
+    </script>
 </body>
 
 </html>

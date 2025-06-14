@@ -6,26 +6,28 @@
                 <div class="text-mabook-midtone text-5xl">
                     <i class="fas fa-book-open"></i>
                 </div>
-                <div class="font-unifraktur text-mabook-light text-5xl">Maboo<span class="font-crimson">k</span></div>
+                <a href="<?= url('index.php') ?>" class="block font-unifraktur text-mabook-light text-5xl">Maboo<span class="font-crimson">k</span></a>
             </div> <!-- end brand -->
 
             <div class="flex text-mabook-light text-lg justify-center items-center font-crimson gap-3">
-                <a href="index.php" class="hover:text-mabook-midtone p-2 group relative text-center">
+                <a href="<?= url('index.php') ?>" class="hover:text-mabook-midtone p-2 group relative text-center">
                     Beranda
                     <div class="absolute bg-mabook-midtone w-0 left-0 bottom-0 h-[2px] group-hover:w-full duration-200"></div>
                 </a>
-                <a href="category.php" class="hover:text-mabook-midtone p-2 group relative text-center">
+                <a href="<?= url('category.php') ?>" class="hover:text-mabook-midtone p-2 group relative text-center">
                     Kategori
                     <div class="absolute bg-mabook-midtone w-0 left-0 bottom-0 h-[2px] group-hover:w-full duration-200"></div>
                 </a>
-                <a href="collection.php" class="hover:text-mabook-midtone p-2 group relative text-center">
+                <a href="<?= url('collection.php') ?>" class="hover:text-mabook-midtone p-2 group relative text-center">
                     Koleksi
                     <div class="absolute bg-mabook-midtone w-0 left-0 bottom-0 h-[2px] group-hover:w-full duration-200"></div>
                 </a>
-                <a href="favorite.php" class="hover:text-mabook-midtone p-2 group relative text-center">
-                    Favoritku
-                    <div class="absolute bg-mabook-midtone w-0 left-0 bottom-0 h-[2px] group-hover:w-full duration-200"></div>
-                </a>
+                <?php if ($isLoggedIn): ?>
+                    <a href="<?= url('favorite.php') ?>" class="hover:text-mabook-midtone p-2 group relative text-center">
+                        Favoritku
+                        <div class="absolute bg-mabook-midtone w-0 left-0 bottom-0 h-[2px] group-hover:w-full duration-200"></div>
+                    </a>
+                <?php endif; ?>
             </div> <!-- end navbar links -->
 
             <div>
@@ -40,8 +42,17 @@
             </div> <!-- end form -->
 
             <div class="flex gap-2 items-center justify-center">
-                <a href="login.php" class="font-crimson text-mabook-light border border-mabook-light px-3 py-2 text-lg rounded-xl">Login</a>
-                <a href="#" class="font-crimson text-mabook-light border border-mabook-light px-3 py-2 text-lg rounded-xl">Register</a>
+                <?php if ($isLoggedIn) : ?>
+                    <?php if ($loggedUser['role'] == 'ADMIN') : ?>
+                        <a href="<?= url('admin/dashboard.php') ?>" class="font-crimson text-mabook-light border border-mabook-light px-3 py-2 text-lg rounded-xl">Dashboard</a>
+                    <?php else: ?>
+                        <div class="text-mabook-light text-sm italic">Hello, <?= $loggedUser['name'] ?></div>
+                    <?php endif; ?>
+                    <a href="<?= url('logout.php') ?>" class="font-crimson text-mabook-light border border-mabook-light px-3 py-2 text-lg rounded-xl">Logout</a>
+                <?php else: ?>
+                    <a href="<?= url('login.php') ?>" class="font-crimson text-mabook-light border border-mabook-light px-3 py-2 text-lg rounded-xl">Login</a>
+                    <a href="<?= url('register.php') ?>" class="font-crimson text-mabook-light border border-mabook-light px-3 py-2 text-lg rounded-xl">Register</a>
+                <?php endif; ?>
             </div> <!-- end login buttons -->
         </div>
     </div> <!-- end container -->

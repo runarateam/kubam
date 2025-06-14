@@ -36,9 +36,12 @@
 .mabook-form-control {
     @apply focus:outline-none p-2 text-mabook-light border border-mabook-light/50 w-full rounded-xl;
 }
+.mabook-form-control option {
+    @apply text-black;
+}
 
 .mabook-guest-input {
-    @apply w-full mt-4 p-3 placeholder:text-mabook-light text-mabook-light font-crimson text-lg focus:outline-none border border-mabook-midtone/40 focus:border-mabook-midtone/100;
+    @apply w-full mt-4 p-3 placeholder:text-mabook-light/30 text-mabook-light font-crimson text-lg focus:outline-none border border-mabook-midtone/40 focus:border-mabook-midtone/100;
 }
 
 .mabook-btn-primary {
