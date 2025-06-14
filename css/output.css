@@ -1,4 +1,4 @@
-/*! tailwindcss v4.1.8 | MIT License | https://tailwindcss.com */
+/*! tailwindcss v4.1.10 | MIT License | https://tailwindcss.com */
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=UnifrakturMaguntia&display=swap');
 @layer properties;
 @layer theme, base, components, utilities;
@@ -9,9 +9,12 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-red-400: oklch(70.4% 0.191 22.216);
+    --color-gray-600: oklch(44.6% 0.03 256.802);
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
+    --text-xs: 0.75rem;
+    --text-xs--line-height: calc(1 / 0.75);
     --text-sm: 0.875rem;
     --text-sm--line-height: calc(1.25 / 0.875);
     --text-lg: 1.125rem;
@@ -191,6 +194,9 @@
   .absolute {
     position: absolute;
   }
+  .fixed {
+    position: fixed;
+  }
   .relative {
     position: relative;
   }
@@ -209,8 +215,14 @@
   .right-0 {
     right: calc(var(--spacing) * 0);
   }
+  .right-8 {
+    right: calc(var(--spacing) * 8);
+  }
   .bottom-0 {
     bottom: calc(var(--spacing) * 0);
+  }
+  .bottom-8 {
+    bottom: calc(var(--spacing) * 8);
   }
   .left-0 {
     left: calc(var(--spacing) * 0);
@@ -242,6 +254,9 @@
   .mx-auto {
     margin-inline: auto;
   }
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
+  }
   .mt-3 {
     margin-top: calc(var(--spacing) * 3);
   }
@@ -253,6 +268,9 @@
   }
   .mt-12 {
     margin-top: calc(var(--spacing) * 12);
+  }
+  .mb-2 {
+    margin-bottom: calc(var(--spacing) * 2);
   }
   .mb-3 {
     margin-bottom: calc(var(--spacing) * 3);
@@ -293,6 +311,12 @@
   }
   .w-0 {
     width: calc(var(--spacing) * 0);
+  }
+  .w-1 {
+    width: calc(var(--spacing) * 1);
+  }
+  .w-1\/2 {
+    width: calc(1/2 * 100%);
   }
   .w-6 {
     width: calc(var(--spacing) * 6);
@@ -441,12 +465,6 @@
       border-color: color-mix(in oklab, var(--color-mabook-midtone) 25%, transparent);
     }
   }
-  .border-mabook-midtone\/40 {
-    border-color: color-mix(in srgb, #b85c38 40%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      border-color: color-mix(in oklab, var(--color-mabook-midtone) 40%, transparent);
-    }
-  }
   .bg-\[\#1A120B\] {
     background-color: #1A120B;
   }
@@ -476,6 +494,9 @@
   }
   .bg-red-400 {
     background-color: var(--color-red-400);
+  }
+  .bg-white {
+    background-color: var(--color-white);
   }
   .bg-\[url\(\'https\:\/\/www\.transparenttextures\.com\/patterns\/black-paper\.png\'\)\] {
     background-image: url('https://www.transparenttextures.com/patterns/black-paper.png');
@@ -566,6 +587,10 @@
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-xl--line-height));
   }
+  .text-xs {
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+  }
   .font-black {
     --tw-font-weight: var(--font-weight-black);
     font-weight: var(--font-weight-black);
@@ -577,6 +602,9 @@
   .font-semibold {
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
+  }
+  .text-gray-600 {
+    color: var(--color-gray-600);
   }
   .text-mabook-light {
     color: var(--color-mabook-light);
@@ -641,11 +669,6 @@
       }
     }
   }
-  .placeholder\:text-mabook-light {
-    &::placeholder {
-      color: var(--color-mabook-light);
-    }
-  }
   .hover\:-translate-y-0\.5 {
     &:hover {
       @media (hover: hover) {
@@ -678,12 +701,6 @@
       }
     }
   }
-  .focus\:outline-none {
-    &:focus {
-      --tw-outline-style: none;
-      outline-style: none;
-    }
-  }
   .active\:translate-y-0\.5 {
     &:active {
       --tw-translate-y: calc(var(--spacing) * 0.5);
@@ -694,6 +711,16 @@
     &:active {
       --tw-translate-y: calc(var(--spacing) * 1);
       translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+  }
+  .lg\:w-1\/2 {
+    @media (width >= 64rem) {
+      width: calc(1/2 * 100%);
+    }
+  }
+  .lg\:w-1\/3 {
+    @media (width >= 64rem) {
+      width: calc(1/3 * 100%);
     }
   }
 }
@@ -736,6 +763,31 @@
     outline-style: none;
   }
 }
+.mabook-guest-input {
+  margin-top: calc(var(--spacing) * 4);
+  width: 100%;
+  border-style: var(--tw-border-style);
+  border-width: 1px;
+  border-color: color-mix(in srgb, #b85c38 40%, transparent);
+  @supports (color: color-mix(in lab, red, red)) {
+    border-color: color-mix(in oklab, var(--color-mabook-midtone) 40%, transparent);
+  }
+  padding: calc(var(--spacing) * 3);
+  font-family: var(--font-crimson);
+  font-size: var(--text-lg);
+  line-height: var(--tw-leading, var(--text-lg--line-height));
+  color: var(--color-mabook-light);
+  &::placeholder {
+    color: var(--color-mabook-light);
+  }
+  &:focus {
+    border-color: var(--color-mabook-midtone);
+  }
+  &:focus {
+    --tw-outline-style: none;
+    outline-style: none;
+  }
+}
 .mabook-btn-primary {
   width: 100%;
   cursor: pointer;
@@ -760,6 +812,9 @@
     --tw-translate-y: calc(var(--spacing) * 1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
+}
+html {
+  scroll-behavior: smooth;
 }
 @property --tw-border-style {
   syntax: "*";

@@ -17,14 +17,18 @@
             <div class="text-center font-unifraktur text-mabook-light text-6xl">Maboo<span class="font-crimson">k</span></div>
             <p class="font-crimson text-mabook-light">Selamat datang!. Silahkan login terlebih dahulu</p>
         </div>
-        <div class="justify-center p-8 bg-mabook-primary text-mabook-light shadow-2xl rounded-2xl w-11/12 lg:w-1/3">
+        <div class="justify-center p-8 bg-mabook-primary text-mabook-light shadow-2xl rounded-2xl w-11/12 lg:w-1/2">
             <form action="#">
-                <input type="text" name="username" placeholder="Your email/username..." class="mabook-guest-input">
+                <input type="text" name="name" placeholder="Tuliskan nama lengkap anda..." class="mabook-guest-input">
+                <input type="email" name="email" placeholder="Tuliskan email anda..." class="mabook-guest-input">
+                <input type="text" name="username" placeholder="Tuliskan username..." class="mabook-guest-input">
+                <input type="text" name="password" placeholder="Tuliskan password..." class="mabook-guest-input">
+                <input type="text" name="confirm_password" placeholder="Konfirmasi password..." class="mabook-guest-input">
                 <input type="password" name="password" placeholder="Your password..." class="mabook-guest-input">
                 <!-- <button type="submit" class="bg-mabook-midtone p-3 text-center w-full mt-4 font-crimson font-bold text-lg cursor-pointer active:translate-y-0.5">Sign in</button> -->
                 <a href="dashboard.php" class="block bg-mabook-midtone p-3 text-center w-full mt-4 font-crimson font-bold text-lg cursor-pointer active:translate-y-0.5">Sign in</a>
             </form>
-            <div class="italic text-sm text-center mt-2">Gapunya akun?, bikin dulu <a href="register.php" class="underline">disini</a>.</div>
+            <div class="italic text-sm text-center mt-2">Atau udah punya akun?, silahkan <a href="login.php" class="underline">login</a>.</div>
         </div>
     </div>
 </body>
