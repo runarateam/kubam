@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($description)) $errors['description'] = "Deskripsi tidak boleh kosong";
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
-        header('Location: publisher-create.php');
+        header('Location: publisher-update.php?id=' . $id);
         exit;
     }
 
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Location: publishers.php');
     } else {
         $_SESSION['error'] = "Publisher tidak dapat dibuat";
-        header('Location: publisher-create.php');
+        header('Location: publisher-update.php?id=' . $id);
     }
     exit;
 }

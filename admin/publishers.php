@@ -7,7 +7,7 @@
 <?php
 $filters = [];
 $page = $_GET['page'] ?? 1;
-$limit = $_GET['limit'] ?? 5;
+$limit = $_GET['limit'] ?? 10;
 $publishers = listPublishers($filters, ['page' => $page, 'limit' => $limit]);
 $countPublishers = countPublishers($filters);
 $totalPage = ceil($countPublishers / $limit);

@@ -6,7 +6,7 @@
 <?php
 $filters = [];
 $page = $_GET['page'] ?? 1;
-$limit = $_GET['limit'] ?? 5;
+$limit = $_GET['limit'] ?? 10;
 $authors = listAuthors($filters, ['page' => $page, 'limit' => $limit]);
 $countAuthors = countAuthors($filters);
 $totalPage = ceil($countAuthors / $limit);
