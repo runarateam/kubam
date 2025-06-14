@@ -1,5 +1,7 @@
-<?php include('./config/constants.php') ?>
-<?php include('../mabook/admin/dummy.php') ?>
+<?php require_once(__DIR__ . '/config/constants.php') ?>
+<?php require_once(__DIR__ . '/functions/helper.php') ?>
+<?php require_once(__DIR__ . '/functions/session.php') ?>
+<?php require_once(__DIR__ . '/admin/dummy.php') ?>
 <?php
 $authorId = $_GET['author_id'];
 $publisherId = $_GET['publisher_id'];
@@ -18,7 +20,7 @@ $year = $_GET['year'];
 </head>
 
 <body class="bg-[url('https://www.transparenttextures.com/patterns/black-paper.png')] bg-[#1A120B]">
-    <?php include('./components/header.php') ?>
+    <?php require_once(__DIR__ . '/components/header.php') ?>
 
     <div class="w-11/12 max-w-[1200px] mx-auto mt-12">
 
@@ -67,7 +69,7 @@ $year = $_GET['year'];
 
     </div> <!-- end container -->
 
-    <?php include('./components/footer.php') ?>
+    <?php require_once(__DIR__ . '/components/footer.php') ?>
     <script>
         const filterObj = {}
         <?= isset($authorId) ? "filterObj.author_id = $authorId \n" : '' ?>

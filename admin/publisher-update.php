@@ -1,5 +1,7 @@
-<?php include('./dummy.php') ?>
-<?php include('../config/constants.php') ?>
+<?php require_once(__DIR__ . '/dummy.php') ?>
+<?php require_once(__DIR__ . '/../config/constants.php') ?>
+<?php require_once(__DIR__ . '/../functions/helper.php') ?>
+<?php require_once(__DIR__ . '/../functions/session.php') ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,10 +15,10 @@
 </head>
 
 <body class="bg-[url('https://www.transparenttextures.com/patterns/black-paper.png')] bg-[#1A120B]">
-    <?php include('../components/header.php') ?>
+    <?php require_once(__DIR__ . '/../components/header.php') ?>
 
     <div class="w-11/12 max-w-[1200px] mx-auto mt-12 flex items-start gap-4 relative">
-        <?php include('../components/admin-sidebar.php') ?>
+        <?php require_once(__DIR__ . '/../components/admin-sidebar.php') ?>
 
         <div class="w-full px-3">
             <div>
@@ -53,7 +55,7 @@
 
     </div> <!-- end container -->
 
-    <?php include('../components/footer.php') ?>
+    <?php require_once(__DIR__ . '/../components/footer.php') ?>
 </body>
 
 </html>

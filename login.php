@@ -1,5 +1,7 @@
-<?php include('./config/constants.php') ?>
-<?php include('./functions/guest.php') ?>
+<?php require_once(__DIR__ . '/config/constants.php') ?>
+<?php require_once(__DIR__ . '/functions/helper.php') ?>
+<?php require_once(__DIR__ . '/functions/session.php') ?>
+<?php require_once(__DIR__ . '/functions/guest.php') ?>
 
 <?php
 

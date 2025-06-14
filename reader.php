@@ -1,5 +1,5 @@
-<?php include('./config/constants.php') ?>
-<?php include('./admin/dummy.php') ?>
+<?php require_once(__DIR__ . '/config/constants.php') ?>
+<?php require_once(__DIR__ . '/admin/dummy.php') ?>
 <?php
 $book = $books[0];
 ?>
@@ -16,11 +16,11 @@ $book = $books[0];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.0.375/pdf_viewer.min.css" integrity="sha512-bt54/qzXTxutlNalAuK/V3dxe1T7ZDqeEYbZPle3G1kOH+K1zKlQE0ZOkdYVwPDxdCFrdLHwneslj7sA5APizQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<?php include('./admin/dummy.php') ?>
+<?php require_once(__DIR__ . '/admin/dummy.php') ?>
 
 
 <body class="bg-[url('https://www.transparenttextures.com/patterns/black-paper.png')] bg-[#1A120B]">
-    <?php include('./components/header.php') ?>
+    <?php require_once(__DIR__ . '/components/header.php') ?>
 
     <div class="w-11/12 max-w-[1200px] mx-auto mt-12">
 
@@ -43,7 +43,7 @@ $book = $books[0];
 
     </div>
 
-    <?php include('./components/footer.php') ?>
+    <?php require_once(__DIR__ . '/components/footer.php') ?>
     <script type="module" src="https://mozilla.github.io/pdf.js/build/pdf.mjs"></script>
 
     <script type="module">
