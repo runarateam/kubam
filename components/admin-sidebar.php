@@ -18,6 +18,13 @@
                 <div class="font-bold ">Buku</div>
             </div>
         </a>
+        <a href="categories.php" class="relative py-2 px-4 w-full group">
+            <div class="absolute h-[2px] left-0 right-0 w-0 duration-200 group-hover:w-full bg-mabook-light bottom-0"></div>
+            <div class="flex gap-3 items-center text-lg">
+                <i class="fas w-6 fa-th-large"></i>
+                <div class="font-bold">Kategori</div>
+            </div>
+        </a>
         <a href="authors.php" class="relative py-2 px-4 w-full group">
             <div class="absolute h-[2px] left-0 right-0 w-0 duration-200 group-hover:w-full bg-mabook-light bottom-0"></div>
             <div class="flex gap-3 items-center text-lg">
@@ -25,7 +32,7 @@
                 <div class="font-bold ">Penulis</div>
             </div>
         </a>
-        <a href="publishers.php#" class="relative py-2 px-4 w-full group">
+        <a href="publishers.php" class="relative py-2 px-4 w-full group">
             <div class="absolute h-[2px] left-0 right-0 w-0 duration-200 group-hover:w-full bg-mabook-light bottom-0"></div>
             <div class="flex gap-3 items-center text-lg">
                 <i class="fas w-6 fa-users-line"></i>
