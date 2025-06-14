@@ -48,6 +48,10 @@
     @apply w-full p-2 bg-mabook-midtone text-white/80 rounded-xl shadow-lg duration-200 cursor-pointer hover:-translate-y-0.5 active:translate-y-1;
 }
 
+.mabook-pagination-item {
+    @apply size-8 flex items-center justify-center text-sm font-bold font-crimson border border-mabook-light text-mabook-light font-semibold;
+}
+
 html {
     scroll-behavior: smooth;
 }

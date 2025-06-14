@@ -1,10 +1,26 @@
-<?php require_once(__DIR__ . '/dummy.php') ?>
 <?php require_once(__DIR__ . '/../config/constants.php') ?>
 <?php require_once(__DIR__ . '/../functions/helper.php') ?>
 <?php require_once(__DIR__ . '/../functions/session.php') ?>
 <?php require_once(__DIR__ . '/../functions/admin.php') ?>
-<?php include('./dummy.php') ?>
-<?php include('../config/constants.php') ?>
+
+<?php
+$filters = [];
+$page = $_GET['page'] ?? 1;
+$limit = $_GET['limit'] ?? 5;
+$authors = listAuthors($filters, ['page' => $page, 'limit' => $limit]);
+$countAuthors = countAuthors($filters);
+$totalPage = ceil($countAuthors / $limit);
+
+// handle delete via POST
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST['id'];
+
+    // eksekusi backend delete author
+    deleteAuthor($id);
+    header('Location: authors.php');
+    exit;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,20 +64,30 @@
                         <tbody>
                             <?php foreach ($authors as $index => $author): ?>
                                 <tr>
-                                    <td class="p-2 border border-mabook-light/50"><?= $index + 1 ?></td>
+                                    <td class="p-2 border border-mabook-light/50"><?= (($page - 1) * $limit) + $index + 1 ?></td>
                                     <td class="p-2 border border-mabook-light/50"><?= $author['name'] ?></td>
                                     <td class="p-2 border border-mabook-light/50"><?= $author['website'] ?></td>
                                     <td class="p-2 border border-mabook-light/50"><?= $author['description'] ?></td>
                                     <td class="p-2 border border-mabook-light/50">
                                         <div class="flex gap-2">
-                                            <a href="author-update.php"><i class="fas fa-edit"></i></a>
-                                            <a href="#"><i class="fas fa-trash text-red-400"></i></a>
+                                            <a href="author-update.php?id=<?= $author['id'] ?>"><i class="fas fa-edit"></i></a>
+                                            <form action="#" method="POST" onsubmit="return confirm('Anda yakin?')">
+                                                <input type="hidden" name="id" value="<?= $author['id'] ?>">
+                                                <button type="submit" class="cursor-pointer" onclick=""><i class="fas fa-trash text-red-400"></i></button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                    <div class="flex gap-3 justify-center mt-4">
+                        <button onclick="window.location='authors.php?page=<?= $page - 1 ?>'" <?= $page <= 1 ? 'disabled' : '' ?> class="mabook-pagination-item disabled:!border-mabook-light/30  disabled:!text-mabook-light/30 cursor-pointer"><i class="fas fa-chevron-left"></i></button>
+                        <?php for ($i = 0; $i < $totalPage; $i++): ?>
+                            <a href="authors.php?page=<?= $i + 1 ?>" class="mabook-pagination-item <?= $page == $i + 1 ? '!bg-mabook-light !text-mabook-primary' : '' ?>"><?= $i + 1 ?></a>
+                        <?php endfor; ?>
+                        <button onclick="window.location='authors.php?page=<?= $page + 1 ?>'" <?= $page >= $totalPage ? 'disabled' : '' ?> class="mabook-pagination-item disabled:!border-mabook-light/30  disabled:!text-mabook-light/30 cursor-pointer"><i class="fas fa-chevron-right"></i></button>
+                    </div>
                 </div>
             </div>
         </div><!-- end admin content -->
