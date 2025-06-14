@@ -1,8 +1,42 @@
-<?php require_once(__DIR__ . '/dummy.php') ?>
 <?php require_once(__DIR__ . '/../config/constants.php') ?>
 <?php require_once(__DIR__ . '/../functions/helper.php') ?>
 <?php require_once(__DIR__ . '/../functions/session.php') ?>
+<?php require_once(__DIR__ . '/../functions/admin.php') ?>
 
+<?php
+$id = $_GET['id'];
+if (empty($id)) die('Halaman tidak valid, <a href="publishers.php"><< Kembali</a>');
+
+$publisher = getPublisher($id);
+
+// handler buat submit 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $website = $_POST['website'];
+    $description = $_POST['description'];
+
+    // validasi
+    if (empty($name)) $errors['name'] = "Nama tidak boleh kosong";
+    if (empty($website)) $errors['website'] = "Website tidak boleh kosong";
+    if (empty($description)) $errors['description'] = "Deskripsi tidak boleh kosong";
+    if (!empty($errors)) {
+        $_SESSION['errors'] = $errors;
+        header('Location: publisher-create.php');
+        exit;
+    }
+
+    // eksekusi backend update publisher
+    if (editPublisher($id, $name, $website, $description)) {
+        $_SESSION['success'] = "Publisher berhasil dibuat";
+        header('Location: publishers.php');
+    } else {
+        $_SESSION['error'] = "Publisher tidak dapat dibuat";
+        header('Location: publisher-create.php');
+    }
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,21 +66,30 @@
                     </a>
                 </div>
                 <div class="bg-mabook-primary w-full p-5 mt-3">
-                    <form action="#">
+                    <form action="#" method="POST">
+                        <input type="hidden" name="id" value="<?= $publisher['id'] ?>">
                         <div class="mb-3">
                             <label for="name" class="mabook-label">Nama</label>
-                            <input type="text" id="name" name="name" class="mabook-form-control" placeholder="Tuliskan nama penerbit...">
+                            <input type="text" id="name" name="name" value="<?= $old['name'] ?? $publisher['name'] ?>" class="mabook-form-control" placeholder="Tuliskan nama penulis...">
+                            <?php if (isset($errors['name'])) : ?>
+                                <span class="italic text-red-400 text-sm"><?= $errors['name'] ?></span>
+                            <?php endif; ?>
                         </div>
                         <div class="mb-3">
                             <label for="website" class="mabook-label">Website</label>
-                            <input type="number" id="website" name="website" class="mabook-form-control" placeholder="Tuliskan alamat website penerbit...">
+                            <input type="text" id="website" name="website" value="<?= $old['website'] ?? $publisher['website'] ?>" class="mabook-form-control" placeholder="Tuliskan alamat website penulis...">
+                            <?php if (isset($errors['website'])) : ?>
+                                <span class="italic text-red-400 text-sm"><?= $errors['website'] ?></span>
+                            <?php endif; ?>
                         </div>
                         <div class="mb-3">
                             <label for="description" class="mabook-label">Tahun Terbit</label>
-                            <textarea name="description" id="description" placeholder="Tuliskan deskripsi tentang penerbit..." class="mabook-form-control"></textarea>
+                            <textarea name="description" id="description" placeholder="Tuliskan deskripsi tentang penulis..." class="mabook-form-control"><?= $old['description'] ?? $publisher['description'] ?></textarea>
+                            <?php if (isset($errors['description'])) : ?>
+                                <span class="italic text-red-400 text-sm"><?= $errors['description'] ?></span>
+                            <?php endif; ?>
                         </div>
                         <button class="mabook-btn-primary mt-3">Simpan</button>
-
                     </form>
                 </div>
             </div>
