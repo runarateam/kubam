@@ -10,19 +10,19 @@
             </div> <!-- end brand -->
 
             <div class="flex text-mabook-light text-lg justify-center items-center font-crimson gap-3">
-                <a href="/" class="hover:text-mabook-midtone p-2 group relative text-center">
+                <a href="index.php" class="hover:text-mabook-midtone p-2 group relative text-center">
                     Beranda
                     <div class="absolute bg-mabook-midtone w-0 left-0 bottom-0 h-[2px] group-hover:w-full duration-200"></div>
                 </a>
-                <a href="/category.php" class="hover:text-mabook-midtone p-2 group relative text-center">
+                <a href="category.php" class="hover:text-mabook-midtone p-2 group relative text-center">
                     Kategori
                     <div class="absolute bg-mabook-midtone w-0 left-0 bottom-0 h-[2px] group-hover:w-full duration-200"></div>
                 </a>
-                <a href="/collection.php" class="hover:text-mabook-midtone p-2 group relative text-center">
+                <a href="collection.php" class="hover:text-mabook-midtone p-2 group relative text-center">
                     Koleksi
                     <div class="absolute bg-mabook-midtone w-0 left-0 bottom-0 h-[2px] group-hover:w-full duration-200"></div>
                 </a>
-                <a href="/favorite.php" class="hover:text-mabook-midtone p-2 group relative text-center">
+                <a href="favorite.php" class="hover:text-mabook-midtone p-2 group relative text-center">
                     Favoritku
                     <div class="absolute bg-mabook-midtone w-0 left-0 bottom-0 h-[2px] group-hover:w-full duration-200"></div>
                 </a>

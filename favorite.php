@@ -1,3 +1,5 @@
+<?php include('./config/constants.php') ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mabook</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="<?= url('css/output.css') ?>">
 </head>
 
 
@@ -104,7 +106,7 @@ $books = [
                 <?php foreach ($books as $book) : ?>
                     <a href="#" class="group">
                         <div class="group-hover:-translate-y-1 duration-200 text-mabook-light h-full flex flex-col items-start justify-start p-4 border border-mabook-midtone/25 gap-5 bg-mabook-primary relative rounded-xl overflow-hidden font-crimson">
-                            <img src="<?= $book['thumbnail'] ?>" class="w-full">
+                            <img src="<?= url($book['thumbnail']) ?>" class="w-full">
                             <div class="flex flex-col gap-3">
                                 <h2 class="text-3xl"><?= $book['title'] ?></h2>
                                 <div>

@@ -1,4 +1,5 @@
 <?php include('./dummy.php') ?>
+<?php include('../config/constants.php') ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mabook</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="<?= url('css/output.css') ?>">
 </head>
 
 <body class="bg-[url('https://www.transparenttextures.com/patterns/black-paper.png')] bg-[#1A120B]">
@@ -21,7 +22,7 @@
             <div>
                 <div class="font-crimson text-mabook-light flex justify-between items-center">
                     <div class="text-3xl">Edit Buku</div>
-                    <a href="/admin/books.php" class="bg-mabook-midtone text-white/80 py-2 px-4 rounded-xl duration-200 hover:-translate-y-0.5 active:translate-y-1">
+                    <a href="books.php" class="bg-mabook-midtone text-white/80 py-2 px-4 rounded-xl duration-200 hover:-translate-y-0.5 active:translate-y-1">
                         <div class="flex gap-2 items-center font-semibold">
                             <i class="fas fa-chevron-left"></i>
                             Kembali
