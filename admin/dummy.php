@@ -54,6 +54,7 @@ $publishers = [
 
 $books = [
     [
+        'id' => 1,
         'title' => 'Laskar Pelangi',
         'exemplars' => 12,
         'author_id' => 1,
@@ -66,6 +67,7 @@ $books = [
         'author' => $authors[0],
     ],
     [
+        'id' => 1,
         'title' => 'Bumi',
         'exemplars' => 8,
         'author_id' => 2,
@@ -78,6 +80,7 @@ $books = [
         'author' => $authors[1],
     ],
     [
+        'id' => 1,
         'title' => 'Harry Potter and the Philosopher\'s Stone',
         'exemplars' => 15,
         'author_id' => 3,
@@ -90,6 +93,7 @@ $books = [
         'author' => $authors[2],
     ],
     [
+        'id' => 1,
         'title' => '1984',
         'exemplars' => 5,
         'author_id' => 4,
@@ -102,6 +106,7 @@ $books = [
         'author' => $authors[3],
     ],
     [
+        'id' => 1,
         'title' => 'Sapiens: A Brief History of Humankind',
         'exemplars' => 10,
         'author_id' => 5,

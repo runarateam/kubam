@@ -21,7 +21,7 @@
                 <p class="font-crimson text-xl text-center text-white">
                     Perpustakaan digital Dark Academia yang menghadirkan koleksi literatur klasik dan kontemporer terbaik. Temukan dunia pengetahuan, fiksi spekulatif, puisi abadi, dan karya-karya pemikiran mendalam dalam genggaman Anda.
                 </p>
-                <a href="#" class="bg-mabook-midtone p-3 shadow-xl font-crimson text-white font-bold text-lg">Jelajahi Koleksi</a>
+                <a href="collection.php" class="bg-mabook-midtone p-3 shadow-xl font-crimson text-white font-bold text-lg">Jelajahi Koleksi</a>
             </div>
         </div> <!-- end hero section -->
 
