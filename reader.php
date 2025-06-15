@@ -12,16 +12,17 @@ $book = getBook($id);
 $bookmark = getBookmarkByBookId($userId, $book['id']);
 $lastPageRead = $bookmark['last_page_read'];
 
+if (isset($_POST['remove'])) {
+    header('Location: reader.php?book_id=' . $book['id']);
+    deleteBookmark($bookmark['id']);
+}
+
 if (isset($_POST['save'])) {
     $bookId = $id;
     $lastPage = $_POST['last_page'];
 
-    echo "userId: " . $userId . '<br/>';
-    echo "bookId: " . $bookId . '<br/>';
-    echo "lastPage: " . $lastPage . '<br/>';
-
     setBookmark($userId, $bookId, $lastPage);
-    header('Location: favorite.php');
+    header('Location: reader.php?book_id=' . $book['id']);
     exit;
 }
 ?>
@@ -87,7 +88,11 @@ if (isset($_POST['save'])) {
     <div class="fixed bottom-8 right-8 bg-white p-3 rounded-xl shadow-2xl">
         <form action="#" method="POST">
             <input type="hidden" name="last_page">
-            <button name="save" type="submit" class="bg-pink-500 p-2 w-full mb-2 text-white font-semibold rounded-xl cursor-pointer"><i class="fas fa-bookmark mr-1"></i> Save</button>
+            <?php if (empty($bookmark)) : ?>
+                <button name="save" type="submit" class="bg-pink-500 p-2 w-full mb-2 text-white font-semibold rounded-xl cursor-pointer"><i class="fas fa-bookmark mr-1"></i> Save</button>
+            <?php else: ?>
+                <button name="remove" type="submit" class="bg-gray-500 p-2 w-full mb-2 text-white font-semibold rounded-xl cursor-pointer"><i class="fas fa-bookmark mr-1"></i> Remove Favorite</button>
+            <?php endif; ?>
         </form>
         <div class="gap-3 mb-2 items-center">
             <button class="bg-mabook-midtone p-2 text-white font-semibold rounded-xl cursor-pointer" id="prev"><i class="fas fa-chevron-left"></i> Previous</button>

@@ -11,6 +11,13 @@ function setBookmark($userId, $bookId, $lastPage)
     return $stmt->execute();
 }
 
+function deleteBookmark($id)
+{
+    global $conn;
+
+    return $conn->query("DELETE FROM  bookmarks WHERE id = $id");
+}
+
 function listBookmarks($userId)
 {
     global $conn;
