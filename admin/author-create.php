@@ -1,7 +1,7 @@
 <?php require_once(__DIR__ . '/../config/constants.php') ?>
 <?php require_once(__DIR__ . '/../functions/helper.php') ?>
 <?php require_once(__DIR__ . '/../functions/session.php') ?>
-<?php require_once(__DIR__ . '/../functions/admin.php') ?>
+<?php require_once(__DIR__ . '/../functions/authors.php') ?>
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
