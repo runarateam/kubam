@@ -4,6 +4,7 @@
 <?php require_once(__DIR__ . '/functions/guest.php') ?>
 <?php require_once(__DIR__ . '/functions/books.php') ?>
 <?php require_once(__DIR__ . '/functions/bookmarks.php') ?>
+<?php require_once(__DIR__ . '/functions/comments.php') ?>
 <?php
 $userId = $loggedUser['id'];
 
@@ -11,6 +12,8 @@ $id = $_GET['book_id'];
 $book = getBook($id);
 $bookmark = getBookmarkByBookId($userId, $book['id']);
 $lastPageRead = $bookmark['last_page_read'];
+
+$comments = listComments($book['id']);
 
 if (isset($_POST['remove'])) {
     header('Location: reader.php?book_id=' . $book['id']);
@@ -24,6 +27,28 @@ if (isset($_POST['save'])) {
     setBookmark($userId, $bookId, $lastPage);
     header('Location: reader.php?book_id=' . $book['id']);
     exit;
+}
+
+
+if (isset($_POST['save_comment'])) {
+    $comment = $_POST['comment'];
+    $_SESSION['old'] = $_POST;
+
+    if (empty($comment)) {
+        $_SESSION['errors'] = ['comment' => 'Komentar tidak dapat kosong'];
+        header('Location: reader.php?book_id=' . $book['id']);
+        exit;
+    };
+
+    createComment($userId, $book['id'], $comment);
+    unset($_SESSION['old']);
+    header('Location: reader.php?book_id=' . $book['id']);
+}
+
+if (isset($_POST['remove_comment'])) {
+    $id = $_POST['id'];
+    deleteComment($userId, $id);
+    header('Location: reader.php?book_id=' . $book['id']);
 }
 ?>
 
@@ -58,26 +83,28 @@ if (isset($_POST['save'])) {
                     <h3 class="text-2xl font-crimson font-bold text-mabook-light">Comments : </h3>
                     <div class="h-[2px] w-48 bg-mabook-midtone my-3"></div>
                     <form action="#" method="POST" class="mb-8">
-                        <textarea name="comments" id="" class="mabook-form-control bg-mabook-primary" placeholder="Tuliskan komentar..."></textarea>
-                        <input type="submit" class="mabook-btn-primary">
+                        <textarea name="comment" id="" class="mabook-form-control bg-mabook-primary" placeholder="Tuliskan komentar..."><?= $old['comment'] ?? '' ?></textarea>
+                        <?php if (isset($errors['comment'])) : ?>
+                            <p class="text-red-400 mb-2 text-sm italic"><?= $errors['comment'] ?></p>
+                        <?php endif; ?>
+                        <input type="submit" name="save_comment" class="mabook-btn-primary">
                     </form>
                     <div class="flex flex-col gap-4 pl-3">
-                        <div class="flex flex-col font-crimson gap-2">
-                            <div class="text-xl font-bold text-mabook-light">Rahmawati : </div>
-                            <p class="font-semibold text-lg text-mabook-light/70 border-l-4 border-l-mabook-light/50 pl-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit accusantium quo.</p>
-                        </div>
-                        <div class="flex flex-col font-crimson gap-2">
-                            <div class="text-xl font-bold text-mabook-light">Rahmawati : </div>
-                            <p class="font-semibold text-lg text-mabook-light/70 border-l-4 border-l-mabook-light/50 pl-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit accusantium quo.</p>
-                        </div>
-                        <div class="flex flex-col font-crimson gap-2">
-                            <div class="text-xl font-bold text-mabook-light">Rahmawati : </div>
-                            <p class="font-semibold text-lg text-mabook-light/70 border-l-4 border-l-mabook-light/50 pl-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit accusantium quo.</p>
-                        </div>
-                        <div class="flex flex-col font-crimson gap-2">
-                            <div class="text-xl font-bold text-mabook-light">Rahmawati : </div>
-                            <p class="font-semibold text-lg text-mabook-light/70 border-l-4 border-l-mabook-light/50 pl-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit accusantium quo.</p>
-                        </div>
+                        <?php foreach ($comments as $comment) : ?>
+                            <div class="flex gap-2 justify-between items-center">
+                                <div class="flex flex-col font-crimson gap-2">
+                                    <div class="text-xl font-bold text-mabook-light"><?= $comment['user_name'] ?> : </div>
+                                    <p class="font-semibold text-lg text-mabook-light/70 border-l-4 border-l-mabook-light/50 pl-3"><?= $comment['comment'] ?></p>
+                                </div>
+                                <form action="#" method="POST" onsubmit="return confirm('Anda yakin?')">
+                                    <button type="submit" name="remove_comment" class="text-red-400 cursor-pointer mr-2 relative group">
+                                        <input type="hidden" name="id" value="<?= $comment['id'] ?>">
+                                        <div class="absolute -top-full whitespace-nowrap text-xs bg-mabook-light text-mabook-primary group-hover:opacity-100 opacity-0 duration-200 -translate-x-1/2 py-1 px-2 rounded-xl font-semibold font-crimson">Hapus komentar</div>
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
