@@ -2,9 +2,25 @@
 <?php require_once(__DIR__ . '/functions/helper.php') ?>
 <?php require_once(__DIR__ . '/functions/session.php') ?>
 <?php require_once(__DIR__ . '/functions/guest.php') ?>
-<?php require_once(__DIR__ . '/admin/dummy.php') ?>
+<?php require_once(__DIR__ . '/functions/books.php') ?>
+<?php require_once(__DIR__ . '/functions/bookmarks.php') ?>
 <?php
-$book = $books[0];
+$id = $_GET['book_id'];
+$book = getBook($id);
+
+if (isset($_POST['save'])) {
+    $userId = $loggedUser['id'];
+    $bookId = $id;
+    $lastPage = $_POST['last_page'];
+
+    echo "userId: " . $userId . '<br/>';
+    echo "bookId: " . $bookId . '<br/>';
+    echo "lastPage: " . $lastPage . '<br/>';
+
+    setBookmark($userId, $bookId, $lastPage);
+    header('Location: favorite.php');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -66,6 +82,10 @@ $book = $books[0];
     </div> <!-- end container -->
 
     <div class="fixed bottom-8 right-8 bg-white p-3 rounded-xl shadow-2xl">
+        <form action="#" method="POST">
+            <input type="hidden" name="last_page">
+            <button name="save" type="submit" class="bg-pink-500 p-2 w-full mb-2 text-white font-semibold rounded-xl cursor-pointer"><i class="fas fa-bookmark mr-1"></i> Save</button>
+        </form>
         <div class="gap-3 mb-2 items-center">
             <button class="bg-mabook-midtone p-2 text-white font-semibold rounded-xl cursor-pointer" id="prev"><i class="fas fa-chevron-left"></i> Previous</button>
             <button class="bg-mabook-midtone p-2 text-white font-semibold rounded-xl cursor-pointer" id="next">Next <i class="fas fa-chevron-right"></i></button>
@@ -75,12 +95,12 @@ $book = $books[0];
     </div>
 
     <?php require_once(__DIR__ . '/components/footer.php') ?>
-    <script type="module" src="https://mozilla.github.io/pdf.js/build/pdf.mjs"></script>
+    <script type="module" src="<?= url('js/pdf.mjs') ?>"></script>
 
     <script type="module">
         // If absolute URL from the remote server is provided, configure the CORS
         // header on that server.
-        var url = '<?= url('docs/sample.pdf') ?>';
+        var url = '<?= url($book['file']) ?>';
 
 
         // Loaded via <script> tag, create shortcut to access PDF.js exports.
@@ -89,7 +109,7 @@ $book = $books[0];
         } = globalThis;
 
         // The workerSrc property shall be specified.
-        pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.mjs';
+        pdfjsLib.GlobalWorkerOptions.workerSrc = '<?= url('js/pdf-worker.mjs') ?>';
 
         var pdfDoc = null,
             pageNum = 1,
@@ -133,6 +153,7 @@ $book = $books[0];
 
             // Update page counters
             document.getElementById('page_num').textContent = num;
+            document.querySelector("[name='last_page']").value = num;
         }
 
         /**
