@@ -272,6 +272,9 @@
   .my-3 {
     margin-block: calc(var(--spacing) * 3);
   }
+  .mt-1 {
+    margin-top: calc(var(--spacing) * 1);
+  }
   .mt-2 {
     margin-top: calc(var(--spacing) * 2);
   }
@@ -575,6 +578,9 @@
   .bg-\[url\(\'https\:\/\/www\.transparenttextures\.com\/patterns\/black-paper\.png\'\)\] {
     background-image: url('https://www.transparenttextures.com/patterns/black-paper.png');
   }
+  .p-1 {
+    padding: calc(var(--spacing) * 1);
+  }
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
@@ -589,6 +595,9 @@
   }
   .p-8 {
     padding: calc(var(--spacing) * 8);
+  }
+  .px-2 {
+    padding-inline: calc(var(--spacing) * 2);
   }
   .px-3 {
     padding-inline: calc(var(--spacing) * 3);

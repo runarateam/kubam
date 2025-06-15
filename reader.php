@@ -5,11 +5,14 @@
 <?php require_once(__DIR__ . '/functions/books.php') ?>
 <?php require_once(__DIR__ . '/functions/bookmarks.php') ?>
 <?php
+$userId = $loggedUser['id'];
+
 $id = $_GET['book_id'];
 $book = getBook($id);
+$bookmark = getBookmarkByBookId($userId, $book['id']);
+$lastPageRead = $bookmark['last_page_read'];
 
 if (isset($_POST['save'])) {
-    $userId = $loggedUser['id'];
     $bookId = $id;
     $lastPage = $_POST['last_page'];
 
@@ -112,7 +115,7 @@ if (isset($_POST['save'])) {
         pdfjsLib.GlobalWorkerOptions.workerSrc = '<?= url('js/pdf-worker.mjs') ?>';
 
         var pdfDoc = null,
-            pageNum = 1,
+            pageNum = <?= $lastPageRead ?? 1 ?>,
             pageRendering = false,
             pageNumPending = null,
             scale = 0.8,
