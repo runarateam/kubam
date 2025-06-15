@@ -1,4 +1,7 @@
 <?php require_once(__DIR__ . '/config/constants.php') ?>
+<?php require_once(__DIR__ . '/functions/helper.php') ?>
+<?php require_once(__DIR__ . '/functions/session.php') ?>
+<?php require_once(__DIR__ . '/functions/guest.php') ?>
 <?php require_once(__DIR__ . '/admin/dummy.php') ?>
 <?php
 $book = $books[0];
@@ -27,9 +30,37 @@ $book = $books[0];
         <div>
             <div class="font-unifraktur text-mabook-light text-4xl font-bold" id="book-top"><?= $book['title'] ?></div>
             <div class="h-[2px] w-48 bg-mabook-midtone mt-4"></div>
-            <canvas id="pdf-container" class="w-full">
+            <div class="flex gap-4 flex-col lg:flex-row">
+                <canvas id="pdf-container" class="w-full lg:w-8/12">
 
-            </canvas>
+                </canvas>
+                <div class="w-full lg:w-4/12">
+                    <h3 class="text-2xl font-crimson font-bold text-mabook-light">Comments : </h3>
+                    <div class="h-[2px] w-48 bg-mabook-midtone my-3"></div>
+                    <form action="#" method="POST" class="mb-8">
+                        <textarea name="comments" id="" class="mabook-form-control bg-mabook-primary" placeholder="Tuliskan komentar..."></textarea>
+                        <input type="submit" class="mabook-btn-primary">
+                    </form>
+                    <div class="flex flex-col gap-4 pl-3">
+                        <div class="flex flex-col font-crimson gap-2">
+                            <div class="text-xl font-bold text-mabook-light">Rahmawati : </div>
+                            <p class="font-semibold text-lg text-mabook-light/70 border-l-4 border-l-mabook-light/50 pl-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit accusantium quo.</p>
+                        </div>
+                        <div class="flex flex-col font-crimson gap-2">
+                            <div class="text-xl font-bold text-mabook-light">Rahmawati : </div>
+                            <p class="font-semibold text-lg text-mabook-light/70 border-l-4 border-l-mabook-light/50 pl-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit accusantium quo.</p>
+                        </div>
+                        <div class="flex flex-col font-crimson gap-2">
+                            <div class="text-xl font-bold text-mabook-light">Rahmawati : </div>
+                            <p class="font-semibold text-lg text-mabook-light/70 border-l-4 border-l-mabook-light/50 pl-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit accusantium quo.</p>
+                        </div>
+                        <div class="flex flex-col font-crimson gap-2">
+                            <div class="text-xl font-bold text-mabook-light">Rahmawati : </div>
+                            <p class="font-semibold text-lg text-mabook-light/70 border-l-4 border-l-mabook-light/50 pl-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit accusantium quo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div> <!-- end value proposition -->
 
     </div> <!-- end container -->
