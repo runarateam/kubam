@@ -16,7 +16,7 @@ $userId = $loggedUser['id'];
 $id = $_GET['book_id'];
 $book = getBook($id);
 $bookmark = getBookmarkByBookId($userId, $book['id']);
-$lastPageRead = $bookmark['last_page_read'];
+$lastPageRead = $bookmark['last_page_read'] ?? 1;
 
 $comments = listComments($book['id']);
 
