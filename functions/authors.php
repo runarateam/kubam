@@ -41,7 +41,7 @@ function listAuthors($filters, $pagination)
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-function countAuthors()
+function countAuthors($filters)
 {
     global $conn;
 

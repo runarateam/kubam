@@ -57,3 +57,12 @@ function getBookmarkByBookId($userId, $bookId)
     $query = $conn->query("SELECT * FROM bookmarks WHERE user_id = $userId AND book_id = $bookId");
     return $query->fetch_assoc();
 }
+
+function countBookmarks($filters)
+{
+    global $conn;
+
+    $query = $conn->query("SELECT COUNT(*) AS count FROM bookmarks");
+    $data = $query->fetch_assoc();
+    return $data['count'];
+}

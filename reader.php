@@ -6,6 +6,11 @@
 <?php require_once(__DIR__ . '/functions/bookmarks.php') ?>
 <?php require_once(__DIR__ . '/functions/comments.php') ?>
 <?php
+if (empty($loggedUser)) {
+    header('Location: login.php');
+    exit;
+}
+
 $userId = $loggedUser['id'];
 
 $id = $_GET['book_id'];

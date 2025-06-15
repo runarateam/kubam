@@ -98,7 +98,7 @@ function listBookYears()
     return $years;
 }
 
-function countBooks()
+function countBooks($filters)
 {
     global $conn;
 

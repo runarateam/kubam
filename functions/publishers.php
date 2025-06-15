@@ -43,7 +43,7 @@ function listPublishers($filters, $pagination)
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-function countPublishers()
+function countPublishers($filter)
 {
     global $conn;
 

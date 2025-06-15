@@ -2,7 +2,28 @@
 <?php require_once(__DIR__ . '/../functions/helper.php') ?>
 <?php require_once(__DIR__ . '/../functions/session.php') ?>
 <?php require_once(__DIR__ . '/../functions/books.php') ?>
+<?php require_once(__DIR__ . '/../functions/authors.php') ?>
+<?php require_once(__DIR__ . '/../functions/publishers.php') ?>
+<?php require_once(__DIR__ . '/../functions/users.php') ?>
+<?php require_once(__DIR__ . '/../functions/bookmarks.php') ?>
 
+<?php
+$bookCount = countBooks([]);
+$authorCount = countAuthors([]);
+$publisherCount = countPublishers([]);
+$bookmarkCount = countBookmarks([]);
+$userCount = countUsers([]);
+$activeUserCount = countActiveUsers();
+$statActiveUsers = statActiveUsers();
+
+
+$dates = [];
+$values = [];
+foreach ($statActiveUsers as $data) {
+    $dates[] = date('d F', strtotime($data['date']));
+    $values[] = $data['user_count'];
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,42 +46,42 @@
         <div class="w-full px-3">
             <div class="grid grid-cols-3 gap-3">
                 <div class="flex items-center gap-5 justify-between shadow-lg bg-mabook-primary text-mabook-light py-3 px-6 font-crimson">
-                    <h3 class="text-5xl font-black">38</h3>
+                    <h3 class="text-5xl font-black"><?= $bookCount ?></h3>
                     <div class="grow">
                         <div class="text-3xl">Buku</div>
                         <div class="text-sm">Tersimpan</div>
                     </div>
                 </div>
                 <div class="flex items-center gap-5 justify-between shadow-lg bg-mabook-primary text-mabook-light py-3 px-6 font-crimson">
-                    <h3 class="text-5xl font-black">4</h3>
+                    <h3 class="text-5xl font-black"><?= $authorCount ?></h3>
                     <div class="grow">
                         <div class="text-3xl">Penulis</div>
                         <div class="text-sm">Terdaftar</div>
                     </div>
                 </div>
                 <div class="flex items-center gap-5 justify-between shadow-lg bg-mabook-primary text-mabook-light py-3 px-6 font-crimson">
-                    <h3 class="text-5xl font-black">3</h3>
+                    <h3 class="text-5xl font-black"><?= $publisherCount ?></h3>
                     <div class="grow">
                         <div class="text-3xl">Penerbit</div>
                         <div class="text-sm">Tercatat</div>
                     </div>
                 </div>
                 <div class="flex items-center gap-5 justify-between shadow-lg bg-mabook-primary text-mabook-light py-3 px-6 font-crimson">
-                    <h3 class="text-5xl font-black">71</h3>
+                    <h3 class="text-5xl font-black"><?= $userCount ?></h3>
                     <div class="grow">
                         <div class="text-3xl">Pengguna</div>
                         <div class="text-sm">Aktif</div>
                     </div>
                 </div>
                 <div class="flex items-center gap-5 justify-between shadow-lg bg-mabook-primary text-mabook-light py-3 px-6 font-crimson">
-                    <h3 class="text-5xl font-black">37</h3>
+                    <h3 class="text-5xl font-black"><?= $bookmarkCount ?></h3>
                     <div class="grow">
                         <div class="text-3xl">Bookmark</div>
                         <div class="text-sm">Tertaut</div>
                     </div>
                 </div>
                 <div class="flex items-center gap-5 justify-between shadow-lg bg-mabook-primary text-mabook-light py-3 px-6 font-crimson">
-                    <h3 class="text-5xl font-black">6</h3>
+                    <h3 class="text-5xl font-black"><?= $activeUserCount ?></h3>
                     <div class="grow">
                         <div class="text-3xl">Pengguna</div>
                         <div class="text-sm">Membaca hari ini</div>
@@ -85,10 +106,10 @@
         new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: <?= json_encode($dates) ?>,
                 datasets: [{
                     label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    data: <?= json_encode($values) ?>,
                     borderWidth: 2,
                     borderColor: '#e0c097',
                     backgroundColor: 'transparent',
@@ -106,7 +127,9 @@
                         }
                     },
                     y: {
+                        beginAtZero: true,
                         ticks: {
+                            stepSize: 1,
                             color: 'rgba(224, 192, 151, 1)'
                         },
                         grid: {
