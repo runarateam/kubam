@@ -98,13 +98,15 @@ if (isset($_POST['remove_comment'])) {
                                     <div class="text-xl font-bold text-mabook-light"><?= $comment['user_name'] ?> : </div>
                                     <p class="font-semibold text-lg text-mabook-light/70 border-l-4 border-l-mabook-light/50 pl-3"><?= $comment['comment'] ?></p>
                                 </div>
-                                <form action="#" method="POST" onsubmit="return confirm('Anda yakin?')">
-                                    <button type="submit" name="remove_comment" class="text-red-400 cursor-pointer mr-2 relative group">
-                                        <input type="hidden" name="id" value="<?= $comment['id'] ?>">
-                                        <div class="absolute -top-full whitespace-nowrap text-xs bg-mabook-light text-mabook-primary group-hover:opacity-100 opacity-0 duration-200 -translate-x-1/2 py-1 px-2 rounded-xl font-semibold font-crimson">Hapus komentar</div>
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </form>
+                                <?php if ($comment['user_id'] == $userId) : ?>
+                                    <form action="#" method="POST" onsubmit="return confirm('Anda yakin?')">
+                                        <button type="submit" name="remove_comment" class="text-red-400 cursor-pointer mr-2 relative group">
+                                            <input type="hidden" name="id" value="<?= $comment['id'] ?>">
+                                            <div class="absolute -top-full whitespace-nowrap text-xs bg-mabook-light text-mabook-primary group-hover:opacity-100 opacity-0 duration-200 -translate-x-1/2 py-1 px-2 rounded-xl font-semibold font-crimson">Hapus komentar</div>
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </form>
+                                <?php endif; ?>
                             </div>
                         <?php endforeach; ?>
                     </div>
