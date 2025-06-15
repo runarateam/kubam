@@ -30,6 +30,11 @@ function listBooks($filters, $pagination)
         $params[] = $filters['author_id'];
         $types[] .= 's';
     }
+    if (isset($filters['category_id'])) {
+        $where[] = 'category_id = ?';
+        $params[] = $filters['category_id'];
+        $types[] .= 's';
+    }
     if (isset($filters['year'])) {
         $where[] = 'year = ?';
         $params[] = $filters['year'];
@@ -49,6 +54,7 @@ function listBooks($filters, $pagination)
 
     // build query
     $sql = "SELECT * FROM books $whereQuery ORDER BY created_at DESC LIMIT ? OFFSET ?";
+
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(implode("", $types) . 'ss', ...[...$params, $limit, $offset]);
     $stmt->execute();
@@ -63,11 +69,11 @@ function listBooks($filters, $pagination)
         if (!empty($row['publisher_id'])) $publisherIds[] = $row['publisher_id'];
         if (!empty($row['category_id'])) $categoryIds[] = $row['category_id'];
     }
-    $query = $conn->query("SELECT * FROM authors WHERE id IN (" . implode(", ", $authorIds) . ")");
+    $query = $conn->query("SELECT * FROM authors WHERE id IN (" . implode(", ", empty($authorIds) ? ['NULL'] : $authorIds) . ")");
     $authors = $query->fetch_all(MYSQLI_ASSOC);
-    $query = $conn->query("SELECT * FROM publishers WHERE id IN (" . implode(", ", $publisherIds) . ")");
+    $query = $conn->query("SELECT * FROM publishers WHERE id IN (" . implode(", ", empty($publisherIds) ? ['NULL'] : $publisherIds) . ")");
     $publishers = $query->fetch_all(MYSQLI_ASSOC);
-    $query = $conn->query("SELECT * FROM categories WHERE id IN (" . implode(", ", $categoryIds) . ")");
+    $query = $conn->query("SELECT * FROM categories WHERE id IN (" . implode(", ", empty($categoryIds) ? ['NULL'] : $categoryIds) . ")");
     $categories = $query->fetch_all(MYSQLI_ASSOC);
 
 
@@ -78,6 +84,18 @@ function listBooks($filters, $pagination)
         foreach ($categories as $category) if ($row['category_id'] == $category['id']) $data[$index]['category']['name'] = $category['name'];
     }
     return $data;
+}
+
+function listBookYears()
+{
+    global $conn;
+    $query = $conn->query("SELECT DISTINCT (YEAR) as year FROM books ORDER BY year DESC");
+    $data = $query->fetch_all(MYSQLI_ASSOC);
+    $years = [];
+    foreach ($data as $row) {
+        $years[] = $row['year'];
+    }
+    return $years;
 }
 
 function countBooks()
