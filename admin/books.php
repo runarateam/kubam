@@ -1,7 +1,27 @@
-<?php require_once(__DIR__ . '/dummy.php') ?>
 <?php require_once(__DIR__ . '/../config/constants.php') ?>
 <?php require_once(__DIR__ . '/../functions/helper.php') ?>
 <?php require_once(__DIR__ . '/../functions/session.php') ?>
+<?php require_once(__DIR__ . '/../functions/books.php') ?>
+
+
+<?php
+$filters = [];
+$page = $_GET['page'] ?? 1;
+$limit = $_GET['limit'] ?? 10;
+$books = listBooks($filters, ['page' => $page, 'limit' => $limit]);
+$countBooks = countBooks($filters);
+$totalPage = ceil($countBooks / $limit);
+
+// handle delete via POST
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST['id'];
+
+    // eksekusi backend delete book
+    deleteBook($id);
+    header('Location: books.php');
+    exit;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,12 +51,13 @@
                         </div>
                     </a>
                 </div>
-                <div class="bg-mabook-primary w-full p-3 mt-3">
+                <div class="bg-mabook-primary p-3 mt-3 w-full">
                     <table class="border-collapse border border-mabook-light/40 table-auto w-full font-crimson text-mabook-light">
                         <thead>
                             <tr>
                                 <th class="p-2 border border-mabook-light/50">#</th>
                                 <th class="p-2 border border-mabook-light/50">Judul</th>
+                                <th class="p-2 border border-mabook-light/50">Kategori</th>
                                 <th class="p-2 border border-mabook-light/50">Exemplar</th>
                                 <th class="p-2 border border-mabook-light/50">Tahun</th>
                                 <th class="p-2 border border-mabook-light/50">Penulis</th>
@@ -48,15 +69,24 @@
                             <?php foreach ($books as $index => $book): ?>
                                 <tr>
                                     <td class="p-2 border border-mabook-light/50"><?= $index + 1 ?></td>
-                                    <td class="p-2 border border-mabook-light/50"><?= $book['title'] ?></td>
+                                    <td class="p-2 border border-mabook-light/50">
+                                        <div class="flex flex-col gap-2 items-center">
+                                            <img src="<?= url($book['cover']) ?>" class="max-w-32">
+                                            <?= $book['title'] ?>
+                                        </div>
+                                    </td>
+                                    <td class="p-2 border border-mabook-light/50"><?= $book['category']['name'] ?></td>
                                     <td class="p-2 border border-mabook-light/50"><?= $book['exemplars'] ?></td>
                                     <td class="p-2 border border-mabook-light/50"><?= $book['year'] ?></td>
                                     <td class="p-2 border border-mabook-light/50"><?= $book['author']['name'] ?></td>
                                     <td class="p-2 border border-mabook-light/50"><?= $book['publisher']['name'] ?></td>
                                     <td class="p-2 border border-mabook-light/50">
                                         <div class="flex gap-2">
-                                            <a href="book-update.php"><i class="fas fa-edit"></i></a>
-                                            <a href="#"><i class="fas fa-trash text-red-400"></i></a>
+                                            <a href="book-update.php?id=<?= $book['id'] ?>"><i class="fas fa-edit"></i></a>
+                                            <form action="#" method="POST" onsubmit="return confirm('Anda yakin?')">
+                                                <input type="hidden" name="id" value="<?= $book['id'] ?>">
+                                                <button type="submit" class="cursor-pointer" onclick=""><i class="fas fa-trash text-red-400"></i></button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
