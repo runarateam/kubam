@@ -133,6 +133,8 @@ if (isset($_POST['remove_comment'])) {
     <script type="module" src="<?= url('js/pdf.mjs') ?>"></script>
 
     <script type="module">
+        var hasBookmark = <?= empty($bookmark) ? 'false' : 'true' ?>
+
         // If absolute URL from the remote server is provided, configure the CORS
         // header on that server.
         var url = '<?= url($book['file']) ?>';
@@ -189,6 +191,18 @@ if (isset($_POST['remove_comment'])) {
             // Update page counters
             document.getElementById('page_num').textContent = num;
             document.querySelector("[name='last_page']").value = num;
+
+            if (hasBookmark) {
+                const formData = new URLSearchParams();
+                formData.append('user_id', <?= $userId ?>);
+                formData.append('book_id', <?= $book['id'] ?>);
+                formData.append('last_read_page', num);
+
+                fetch('<?= url('save_last_read.php') ?>', {
+                    method: 'POST',
+                    body: formData
+                })
+            }
         }
 
         /**

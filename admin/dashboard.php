@@ -1,6 +1,8 @@
 <?php require_once(__DIR__ . '/../config/constants.php') ?>
 <?php require_once(__DIR__ . '/../functions/helper.php') ?>
 <?php require_once(__DIR__ . '/../functions/session.php') ?>
+<?php require_once(__DIR__ . '/../functions/books.php') ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

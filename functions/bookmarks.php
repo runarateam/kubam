@@ -11,6 +11,15 @@ function setBookmark($userId, $bookId, $lastPage)
     return $stmt->execute();
 }
 
+function updateBookmark($userId, $bookId, $lastPage)
+{
+    global $conn;
+
+    $stmt = $conn->prepare("UPDATE bookmarks SET last_page_read = ?, last_read = NOW() WHERE user_id = ? AND book_id = ?");
+    $stmt->bind_param("iii", $lastPage, $userId, $bookId);
+    return $stmt->execute();
+}
+
 function deleteBookmark($id)
 {
     global $conn;
