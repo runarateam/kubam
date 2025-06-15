@@ -132,7 +132,7 @@ if (isset($_POST['remove_comment'])) {
     </div>
 
     <?php require_once(__DIR__ . '/components/footer.php') ?>
-    <script type="module" src="<?= url('js/pdf.mjs') ?>"></script>
+    <script type="module" src="<?= url('js/pdf.js') ?>"></script>
 
     <script type="module">
         var hasBookmark = <?= empty($bookmark) ? 'false' : 'true' ?>
@@ -148,7 +148,7 @@ if (isset($_POST['remove_comment'])) {
         } = globalThis;
 
         // The workerSrc property shall be specified.
-        pdfjsLib.GlobalWorkerOptions.workerSrc = '<?= url('js/pdf-worker.mjs') ?>';
+        pdfjsLib.GlobalWorkerOptions.workerSrc = '<?= url('js/pdf-worker.js') ?>';
 
         var pdfDoc = null,
             pageNum = <?= $lastPageRead ?? 1 ?>,
