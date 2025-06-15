@@ -16,7 +16,7 @@ function listBooks($filters, $pagination)
     $params = [];
     $types = [];
     if (isset($filters['search'])) {
-        $where[] = 'name LIKE ?';
+        $where[] = 'title LIKE ?';
         $params[] = '%' . $filters['search'] . '%';
         $types[] .= 's';
     }

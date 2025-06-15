@@ -7,6 +7,7 @@
 <?php require_once(__DIR__ . '/functions/publishers.php') ?>
 <?php
 // ambil query parameter dari url
+$search = $_GET['search'];
 $categoryId = $_GET['category_id'];
 $authorId = $_GET['author_id'];
 $publisherId = $_GET['publisher_id'];
@@ -18,6 +19,7 @@ if (isset($categoryId)) $filters['category_id'] = $categoryId;
 if (isset($authorId)) $filters['author_id'] = $authorId;
 if (isset($publisherId)) $filters['publisher_id'] = $publisherId;
 if (isset($year)) $filters['year'] = $year;
+if (isset($search)) $filters['search'] = $search;
 
 $books = listBooks($filters, ['limit' => 999]);
 $authors = listAuthors([], ['limit' => 999]);

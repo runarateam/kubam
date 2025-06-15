@@ -1,3 +1,7 @@
+<?php
+$search = $_GET['search'];
+?>
+
 <!-- header -->
 <header class="bg-mabook-primary border-b border-mabook-midtone py-1 shadow-xl">
     <div class="w-11/12 max-w-[1200px] mx-auto">
@@ -31,9 +35,9 @@
             </div> <!-- end navbar links -->
 
             <div>
-                <form action="">
+                <form action="<?= url('collection.php') ?>" method="GET">
                     <div class="flex items-center">
-                        <input type="text" class="bg-[#1a120b] p-2 text-mabook-light font-crimson" placeholder="Cari buku, penulis...">
+                        <input value="<?= $search ?>" name="search" type="text" class="bg-[#1a120b] p-2 text-mabook-light font-crimson" placeholder="Cari buku, penulis...">
                         <button type="submit" class="text-white bg-mabook-midtone p-2 w-10 duration-200 cursor-pointer hover:bg-mabook-midtone/75">
                             <i class="fas fa-search aspect-square"></i>
                         </button>
