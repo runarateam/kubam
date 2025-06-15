@@ -14,7 +14,7 @@ function listComments($bookId)
     FROM comments c 
     INNER JOIN users u ON u.id = c.user_id
     WHERE book_id = $bookId
-    ORDER BY created_at DESC
+    ORDER BY c.created_at DESC
     SQL;
     $query = $conn->query($sql);
     return $query->fetch_all(MYSQLI_ASSOC);
