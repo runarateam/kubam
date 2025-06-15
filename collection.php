@@ -1,11 +1,29 @@
 <?php require_once(__DIR__ . '/config/constants.php') ?>
 <?php require_once(__DIR__ . '/functions/helper.php') ?>
 <?php require_once(__DIR__ . '/functions/session.php') ?>
-<?php require_once(__DIR__ . '/admin/dummy.php') ?>
+<?php require_once(__DIR__ . '/functions/books.php') ?>
+<?php require_once(__DIR__ . '/functions/authors.php') ?>
+<?php require_once(__DIR__ . '/functions/categories.php') ?>
+<?php require_once(__DIR__ . '/functions/publishers.php') ?>
 <?php
+// ambil query parameter dari url
+$categoryId = $_GET['category_id'];
 $authorId = $_GET['author_id'];
 $publisherId = $_GET['publisher_id'];
 $year = $_GET['year'];
+
+// apply filternya
+$filters = [];
+if (isset($categoryId)) $filters['category_id'] = $categoryId;
+if (isset($authorId)) $filters['author_id'] = $authorId;
+if (isset($publisherId)) $filters['publisher_id'] = $publisherId;
+if (isset($year)) $filters['year'] = $year;
+
+$books = listBooks($filters, ['limit' => 999]);
+$authors = listAuthors([], ['limit' => 999]);
+$categories = listCategories([], ['limit' => 999]);
+$publishers = listPublishers([], ['limit' => 999]);
+$years = listBookYears();
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +46,12 @@ $year = $_GET['year'];
             <div class="font-unifraktur text-mabook-light text-4xl font-bold">Koleksi Maboo<span class="font-crimson">k</span></div>
             <div class="h-[2px] w-48 bg-mabook-midtone mt-4"></div>
             <div class="w-full flex justify-between items-center mt-2 gap-3">
+                <select id="filter-category" class="mabook-form-control">
+                    <option value="">- Pilih kategori -</option>
+                    <?php foreach ($categories as $category) : ?>
+                        <option <?= $categoryId == $category['id'] ? 'selected' : '' ?> value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                    <?php endforeach; ?>
+                </select>
                 <select class="mabook-form-control" id="filter-author">
                     <option value="">- Pilih penulis -</option>
                     <?php foreach ($authors as $author): ?>
@@ -52,7 +76,7 @@ $year = $_GET['year'];
                 <?php foreach ($books as $book) : ?>
                     <a href="reader.php?book_id=<?= $book['id'] ?>" class="group">
                         <div class="group-hover:-translate-y-1 duration-200 text-mabook-light h-full flex flex-col items-start justify-start p-4 border border-mabook-midtone/25 gap-5 bg-mabook-primary relative rounded-xl overflow-hidden font-crimson">
-                            <img src="<?= url($book['thumbnail']) ?>" class="w-full">
+                            <img src="<?= url($book['cover']) ?>" class="w-full">
                             <div class="flex flex-col gap-3">
                                 <h2 class="text-3xl"><?= $book['title'] ?></h2>
                                 <div>
@@ -76,9 +100,19 @@ $year = $_GET['year'];
         <?= isset($publisherId) ? "filterObj.publisher_id = $publisherId \n" : '' ?>
         <?= isset($year) ? "filterObj.year = $year \n" : '' ?>
 
+        const filterCategoryEl = document.querySelector('#filter-category');
         const filterAuthorEl = document.querySelector('#filter-author');
         const filterPublisherEl = document.querySelector('#filter-publisher');
         const filterYearEl = document.querySelector('#filter-year');
+
+
+        // ini kalo filter catgeory berubah
+        filterCategoryEl.addEventListener('change', e => {
+            value = e.target.value
+            if (!value) delete filterObj.category_id
+            else filterObj.category_id = value
+            redirectToFilter()
+        })
 
         // ini kalo filter author berubah
         filterAuthorEl.addEventListener('change', e => {
