@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$loggedUser = $_SESSION['logged_user'];
+$loggedUser = $_SESSION['logged_user'] ?? null;
 $isLoggedIn = isset($loggedUser);
 
 $success = $_SESSION['success'] ?? null;

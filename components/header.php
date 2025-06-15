@@ -1,5 +1,5 @@
 <?php
-$search = $_GET['search'];
+$search = $_GET['search'] ?? '';
 ?>
 
 <!-- header -->

@@ -15,10 +15,10 @@ $years = listBookYears();
 
 <?php
 // ambil query parameter dari url 
-$categoryId = $_GET['category_id'];
-$authorId = $_GET['author_id'];
-$publisherId = $_GET['publisher_id'];
-$year = $_GET['year'];
+$categoryId = $_GET['category_id'] ?? null;
+$authorId = $_GET['author_id'] ?? null;
+$publisherId = $_GET['publisher_id'] ?? null;
+$year = $_GET['year'] ?? null;
 
 // apply filternya
 $filters = [];

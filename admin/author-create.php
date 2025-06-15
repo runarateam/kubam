@@ -68,21 +68,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <form action="#" method="POST">
                         <div class="mb-3">
                             <label for="name" class="mabook-label">Nama</label>
-                            <input type="text" id="name" name="name" value="<?= $old['name'] ?>" class="mabook-form-control" placeholder="Tuliskan nama penulis...">
+                            <input type="text" id="name" name="name" value="<?= $old['name'] ?? '' ?>" class="mabook-form-control" placeholder="Tuliskan nama penulis...">
                             <?php if (isset($errors['name'])) : ?>
                                 <span class="italic text-sm text-red-400"><?= $errors['name'] ?></span>
                             <?php endif; ?>
                         </div>
                         <div class="mb-3">
                             <label for="website" class="mabook-label">Website</label>
-                            <input type="text" id="website" name="website" value="<?= $old['website'] ?>" class="mabook-form-control" placeholder="Tuliskan alamat website penulis...">
+                            <input type="text" id="website" name="website" value="<?= $old['website'] ?? '' ?>" class="mabook-form-control" placeholder="Tuliskan alamat website penulis...">
                             <?php if (isset($errors['website'])) : ?>
                                 <span class="italic text-sm text-red-400"><?= $errors['website'] ?></span>
                             <?php endif; ?>
                         </div>
                         <div class="mb-3">
                             <label for="description" class="mabook-label">Deskripsi</label>
-                            <textarea name="description" id="description" placeholder="Tuliskan deskripsi tentang penulis..." class="mabook-form-control"><?= $old['description'] ?></textarea>
+                            <textarea name="description" id="description" placeholder="Tuliskan deskripsi tentang penulis..." class="mabook-form-control"><?= $old['description'] ?? '' ?></textarea>
                             <?php if (isset($errors['description'])) : ?>
                                 <span class="italic text-sm text-red-400"><?= $errors['description'] ?></span>
                             <?php endif; ?>

@@ -45,8 +45,8 @@ function listBooks($filters, $pagination)
     }
 
     // apply filter pagination
-    $limit = $pagination['limit'];
-    $page = $pagination['page'];
+    $limit = $pagination['limit'] ?? 10;
+    $page = $pagination['page'] ?? 1;
     if (empty($limit)) $limit = 10;
     if (empty($page)) $page = 1;
     $offset = ($page - 1) * $limit;

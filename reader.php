@@ -69,9 +69,6 @@ if (isset($_POST['remove_comment'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.0.375/pdf_viewer.min.css" integrity="sha512-bt54/qzXTxutlNalAuK/V3dxe1T7ZDqeEYbZPle3G1kOH+K1zKlQE0ZOkdYVwPDxdCFrdLHwneslj7sA5APizQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<?php require_once(__DIR__ . '/admin/dummy.php') ?>
-
-
 <body class="bg-[url('https://www.transparenttextures.com/patterns/black-paper.png')] bg-[#1A120B]">
     <?php require_once(__DIR__ . '/components/header.php') ?>
 
