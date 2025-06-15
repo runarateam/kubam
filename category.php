@@ -1,6 +1,7 @@
 <?php require_once(__DIR__ . '/config/constants.php') ?>
 <?php require_once(__DIR__ . '/functions/helper.php') ?>
 <?php require_once(__DIR__ . '/functions/session.php') ?>
+<?php require_once(__DIR__ . '/functions/categories.php') ?>
 
 
 <!DOCTYPE html>
@@ -16,29 +17,7 @@
 
 
 <?php
-$categories = [
-    [
-        'name' => 'Fiksi',
-        'description' => 'Buku-buku yang berisi cerita imajinatif, seperti novel dan cerpen.'
-    ],
-    [
-        'name' => 'Non-Fiksi',
-        'description' => 'Kategori yang mencakup buku berdasarkan fakta dan kejadian nyata, seperti biografi dan buku sejarah.'
-    ],
-    [
-        'name' => 'Sains & Teknologi',
-        'description' => 'Buku yang membahas ilmu pengetahuan, teknologi, dan penemuan ilmiah.'
-    ],
-    [
-        'name' => 'Anak-anak',
-        'description' => 'Buku dengan konten ringan dan ilustratif, cocok untuk anak-anak.'
-    ],
-    [
-        'name' => 'Pengembangan Diri',
-        'description' => 'Kategori yang mencakup buku motivasi, produktivitas, dan pengembangan kepribadian.'
-    ],
-];
-
+$categories = listCategories([], ['limit' => 999]);
 ?>
 
 <body class="bg-[url('https://www.transparenttextures.com/patterns/black-paper.png')] bg-[#1A120B]">
@@ -51,7 +30,7 @@ $categories = [
             <div class="h-[2px] w-48 bg-mabook-midtone mt-4"></div>
             <div class="grid m-4 grid-cols-3 gap-8 mt-8">
                 <?php foreach ($categories as $category): ?>
-                    <a href="#" class="group">
+                    <a href="<?= url("collection.php?category_id=" . $category['id']) ?>" class="group">
                         <div class="group-hover:-translate-y-1 duration-200 text-mabook-light flex flex-col items-start justify-center p-8 border border-mabook-midtone/25 gap-5 bg-mabook-primary relative rounded-xl overflow-hidden font-crimson">
                             <div class="absolute top-0 left-0 h-[6px] bg-mabook-midtone w-full"></div>
                             <div class="font-bold text-3xl"><?= $category['name'] ?></div>
